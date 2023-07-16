@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en" >
+<head>
+  <meta charset="UTF-8">
+  <title>GotBins.exe Coming Soon</title>
+  <link rel="stylesheet" href="./assets/css/coming-soon.css">
+  <link href="assets/img/sybmol.png" rel="shortcut icon">
+
+</head>
+<body>
+<!-- partial:index.partial.html -->
+<div class="page">
+  <div class="countdown-col col">
+    <div class="time middle">
+      <span><div id="days">100</div> Days</span>
+      <span><div id="hours">06</div> Hours</span>
+      <span><div id="minutes">35</div> Minutes</span>
+      <span><div id="seconds">54</div> Seconds</span>
+    </div>
+  </div>
+  <div class="newsletter-col col">
+    <div class="newslatter middle">
+      <h2>GotBins.exe Coming Soon</h2>
+      <h4>Subscribe to get notification when we launch!</h4>
+      <form id="subs-form">
+        <input type="text" id="email-input" placeholder="Enter Your Email"/>
+        <button type="submit" class="newslatter-button">Subscribe</button>
+      </form>
+    </div>
+  </div>
+</div>
+<!-- partial -->
+<script>
+  document.getElementById('subs-form').addEventListener('submit', function(event) {
+    event.preventDefault();
+
+    const emailInput = document.getElementById('email-input');
+    const email = emailInput.value;
+
+    // Make a POST request to the server to save the email
+    fetch('/subscribe', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({ email: email })
+    })
+    .then(response => {
+      if (response.ok) {
+        console.log('Email saved successfully!');
+      } else {
+        console.log('Error saving email:', response.statusText);
+      }
+    })
+    .catch(error => {
+      console.log('Error saving email:', error);
+    });
+  });
+</script>
+  <script  src="./assets/js/coming-soon.js"></script>
+
+</body>
+</html>
