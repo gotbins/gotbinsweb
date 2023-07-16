@@ -1,0 +1,86 @@
+@import url(https://fonts.googleapis.com/css?family=Inconsolata:400,700);
+html {
+  background: #000;
+  overflow-y: scroll; 
+}
+
+body {
+  font: .875em/1.6 'Inconsolata', monospace;
+  color: #ffff;
+  font-weight: 400;
+  max-width: 28em;
+  padding: 1em;
+  margin: 5% 0; 
+}
+::selection{
+  background: #000
+}
+::-webkit-selection{
+  background: #000
+}
+::-moz-selection{
+  background: #000
+}
+a{
+  color: #fff;
+}
+a:hover,a:focus{
+  background: #000;
+  color:#8c03cc;
+}
+h2{
+  font-size: 1em;
+  font-weight: 400;
+}
+p{
+  margin-bottom:2em;
+}
+abbr{
+  cursor: help;
+}
+ul{
+  list-style: none;
+  padding: 0;
+}
+li{
+  margin:1em 0 0;
+}
+span{
+  display: block;
+  color:#999;
+  line-height:1;
+}
+
+kbd{
+  font-family: 'Inconsolata', monospace;
+  border:1px solid #999;
+  text-transform: uppercase;
+  padding:0 .2em;
+}
+input[type="text"]{
+  max-width: 10em;
+  border: none;
+  font-family: inherit;
+  background: #fff;
+  padding:0 .5em;
+}
+input[type="text"]:focus{
+  background: #000;
+  color: #fff;
+  outline:none;
+}
+.command{
+  display: none;
+  max-width: 20em;
+  color: #940bd3;
+  font-weight: 700;
+  margin: 2em 0;
+}
+
+
+section{
+  display: none;
+}
+.open{
+  display: block;
+}
