@@ -2,28 +2,936 @@
 <html lang="en" >
 <head>
   <meta charset="UTF-8">
-  <title>Welcome to GotBins :)</title>
-  <link rel="stylesheet" href="./assets/css/landing.css">
-  <link href="./assets/sybmol.png" rel="shortcut icon">
+  <link rel="stylesheet" href="./style.css">
+  <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/cookieconsent2/3.0.6/cookieconsent.min.css'>
+  <script src="https://cdn.sellix.io/static/js/embed.js"></script>
+  <link href="https://cdn.sellix.io/static/css/embed.css" rel="stylesheet"/>
+<style>
+    @import url(https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,300italic);
+.dropdown-container {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  position: relative;
+}
+.dropdown-container > li {
+  float: left;
+  width: 150px;
+  margin: 0 10px 0 0;
+  position: relative;
+}
+.dropdown-container > li:last-of-type {
+  margin: 0;
+}
+.dropdown-container > li > a, .dropdown-container > li > a:visited {
+  display: block;
+  padding: 10px 20px;
+  border-radius: 2px;
+  text-decoration: none;
+  background: #9900FF;
+  color: #fff;
+  font-weight: bold;
+  text-shadow: 0 -1px 0 rgba(255, 255, 255, 0.4);
+  position: relative;
+  box-shadow: inset 0 0 0 2px rgba(0, 0, 0, 0.2);
+  border-radius: 6px;
+}
+.dropdown-container > li > a:hover, .dropdown-container > li > a:focus, .dropdown-container > li > a:active {
+  background: #9900ff;
+  border-radius: 6px;
+}
+.dropdown-container > li > a:after {
+  float: right;
+  width: 0;
+  height: 0;
+  content: '';
+  border-bottom: 10px solid #FFF;
+  border-right: 10px solid transparent;
+  margin-top: 3px;
+  transform: rotate(-45deg);
+  border-radius: 6px;
+}
+.dropdown-container > li > a.no-arrow:after {
+  display: none;
+}
+.dropdown-container > li.active > a {
+  background: #9900ff;
+  color: white;
+  border-radius: 6px 6px 0 0;
+  text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.4);
+}
+.dropdown-container > li.active > a:after {
+  float: right;
+  width: 0;
+  height: 0;
+  content: '';
+  border-bottom: 10px solid #272822;
+  border-right: 10px solid transparent;
+  margin-top: 10px;
+  transform: rotate(135deg);
+}
+
+.dropdown {
+  display: none;
+  width: 300px;
+  height: 200px;
+  padding: 25px 20px 20px;
+  position: absolute;
+  left: 0;
+  background: #151515;
+  font-size: 14px;
+  color: white;
+  text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.4);
+  border-radius: 0 2px 2px 2px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.5), inset 0 0 0 2px rgba(0, 0, 0, 0.2);
+}
+.dropdown.cart {
+  width: 320px;
+  left: inherit;
+  right: 0;
+  border-radius: 2px 0 2px 2px;
+}
+.dropdown .close {
+  padding: 6px;
+  color: rgba(255, 255, 255, 0.6);
+  position: absolute;
+  top: 0;
+  right: 0;
+  font-size: 12px;
+  background: rgba(0, 0, 0, 0.3);
+  text-decoration: none;
+  border-radius: 0 0 0 2px;
+}
+.dropdown .close:hover {
+  background: rgba(0, 0, 0, 0.5);
+  color: white;
+}
+
+/*Reading font*/
+*, *:before, *:after {
+  box-sizing: border-box;
+}
+
+html {
+  height: 100%;
+}
+
+body {
+  background: url('data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz4gPHN2ZyB2ZXJzaW9uPSIxLjEiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGRlZnM+PHJhZGlhbEdyYWRpZW50IGlkPSJncmFkIiBncmFkaWVudFVuaXRzPSJ1c2VyU3BhY2VPblVzZSIgY3g9IjUwJSIgY3k9IjUwJSIgcj0iODAlIj48c3RvcCBvZmZzZXQ9IjAlIiBzdG9wLWNvbG9yPSIjMzQzNjJlIi8+PHN0b3Agb2Zmc2V0PSI4MCUiIHN0b3AtY29sb3I9IiMyNzI4MjIiLz48L3JhZGlhbEdyYWRpZW50PjwvZGVmcz48cmVjdCB4PSIwIiB5PSIwIiB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBmaWxsPSJ1cmwoI2dyYWQpIiAvPjwvc3ZnPiA=');
+  background: -moz-radial-gradient(#34362e, #272822 80%);
+  background: -webkit-radial-gradient(#34362e, #272822 80%);
+  background: radial-gradient(#34362e, #272822 80%);
+  color: white;
+  font: 16px 'Source Sans Pro', Arial, Helvetica, sans-serif;
+  padding: 20px 50px;
+  color: white;
+}
+
+.main-ctnr {
+  max-width: 1200px;
+  min-width: 850px;
+  margin: auto;
+}
+
+code {
+  padding: 5px;
+  font-style: italic;
+  background: rgba(0, 0, 0, 0.15);
+  font: 14px Courier;
+  box-shadow: inset 0 0 1px rgba(0, 0, 0, 0.5);
+}
+
+hr {
+  margin: 30px auto;
+  border: none;
+  border-top: #666 1px dotted;
+}
+
+h1 {
+  text-align: center;
+  margin: 0;
+}
+
+li {
+  margin-bottom: 10px;
+}
+
+a,
+a:visited {
+  color: #2963BD;
+}
+
+a:hover {
+  color: #c90;
+  text-decoration: none;
+}
+
+.fll {
+  float: left;
+}
+
+.flr {
+  float: right;
+}
+
+.clearfix:before,
+.clearfix:after {
+  display: block;
+  content: "";
+  height: 0;
+  overflow: hidden;
+}
+
+.clearfix:after {
+  clear: both;
+}
+
+.new-window {
+  position: relative;
+  padding-right: 16px;
+}
+.new-window:after {
+  content: '';
+  display: block;
+  width: 14px;
+  height: 12px;
+  position: absolute;
+  top: 10%;
+  right: 0;
+}
+* {
+  font-family: 'Courier New', Courier, monospace;
+}
+.new_version {
+  color: #ccc;
+  background-color: hsla(240, 50%, 25%, 0.25);
+  border: 2px solid red;
+  margin: 2rem 0;
+  padding: 1rem;
+  position: relative;
+}
+.new_version > * {
+  margin: 0;
+}
+.new_version > a {
+  display: inline-block;
+  font-size: 1.25rem;
+  font-weight: 300;
+  margin: 1rem 0;
+}
+.new_version > a::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+}
+.new_version > p {
+  display: block;
+  font-weight: 300;
+}
+
+
+
+/* Tab styling (optional) */
+
+.tl_container {margin: 2rem 0;}
+
+.tl_list {
+  display: flex;
+  padding: 0;
+  margin: 0;
+  align-items: center;
+  justify-content: left;
+  list-style: none;
+}
+
+.tl_list li {
+  margin: 0;
+  width: 33.3333%;
+  text-align: center;
+  border-radius: 4px 4px 0 0;
+}
+
+.tl_list a {
+  color: #fff;
+  padding: 1rem 0.5rem;
+  display: block;
+  border: none;
+  text-decoration: none;
+  text-shadow: none;
+}
+.tl_list a:hover,
+.tl_list a:focus {
+  text-shadow: 0 2px 4px #000
+}
+
+
+/* White focus ring - so you can see when it's focussed (not required) */
+.tl_section h2:focus {
+  outline: 1px transparent currentcolor;
+}
+
+
+/* Section styling (optional) */
+
+.tl_section {
+  padding: 1rem 1.5rem;
+  min-height: 8rem;
+  border-radius: 0 0 4px 4px;
+  text-shadow: none;
+}
+.tl_section h2 {
+  margin-top: 1rem;
+}
+
+
+/* tab & panel colour */
+
+.a,
+.a:hover,
+.a:focus {background-color: transparent;}
+.b,
+.b:hover,
+.b:focus  {background-color: transparent;}
+.c,
+.c:hover,
+.c:focus  {background-color: transparent;}
+.d,
+.d:hover,
+.d:focus  {background-color: transparent;}
+.e,
+.e:hover,
+.e:focus  {background-color: transparent;}
+
+
+/* 
+Section styling (required)
+Removes hidden sections from the keychain. 
+Only used when JavaScript is available.
+*/
+[role="tabpanel"][aria-hidden="true"] {
+  display: none;
+}
+@import url("https://fonts.googleapis.com/css?family=Quicksand:400,500,700&subset=latin-ext");
+html {
+  position: relative;
+  overflow-x: hidden !important;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+a, a:hover {
+  text-decoration: none;
+}
+
+.icon {
+  display: inline-block;
+  width: 1em;
+  height: 1em;
+  stroke-width: 0;
+  stroke: currentColor;
+  fill: currentColor;
+}
+
+.wrapper {
+  width: 100%;
+  width: 100%;
+  height: auto;
+  min-height: 100vh;
+  padding: 50px 20px;
+  padding-top: 100px;
+  display: flex;
+  background-image: transparent;
+  display: flex;
+  background-image: transparent;
+}
+
+</style>
 
 </head>
 <body>
-  <div class="logo">
-    <img class="logo-img" src="./assets/logo.png" onclick="window.open('./GotBins/index.html')" />
+<!-- partial:index.partial.html -->
+<main class="main-ctnr">
+  <h1><a style="color: #fff; text-decoration: none;" href="">Welcome to <abbr style="text-decoration: none;" title="The Best Marketplace Worldwide">GotBins</abbr></a></h1>
+
+    <hr>
+    <nav role='navigation' class="clearfix">
+        <ul class="dropdown-container fll">
+            <li><a href="#">GotBins</a></li>
+            <li><a href="#">Services</a>
+                <div class="dropdown" href="" >
+                    <!-- <p><a href="#" style="color: #fff;text-decoration: none;">Subscription</a></p>
+                    <p><a href="#" style="color: #fff;text-decoration: none;">Plans</a></p>
+                    <p><a href="#" style="color: #fff;text-decoration: none;">in-house features</a></p> -->
+                    <p><a href="#" style="color: #fff;text-decoration: none;">Coming Soon</a></p>
+                    <p><a href="#" class="close">Close [x]</a></p>
+                </div>
+            </li>
+            <li><a href="#">More</a>
+                <div class="dropdown">
+                  <p><a href="#" style="color: #fff;text-decoration: none;">Coming Soon</a></p>
+                  <p><a href="#" style="color: #fff;text-decoration: none;">Sources</a></p>
+                    <p><a href="#" class="close">Close [x]</a></p>
+                </div>
+            </li>
+        </ul>
+        <ul class="dropdown-container flr">
+            <li><a href="#" class="no-arrow">Login</a></li>
+            <!-- <li><a href="#">Cart</a>
+                <div class="dropdown cart">This DIV would contain the shopping cart information
+                    <p><a href="#" class="close">Close [x]</a></p>
+                </div>
+            </li> -->
+        </ul>
+    </nav>
+    <hr>
+
+    
+    <div class="new_version">
+      <h2>New Version for 2024:   v0.0.28</h2>
+      <a style="text-decoration: none; color: #9900ff;" href="" target=_self><b> GotBins v0.0.28</b></a>
+      <p>A complete rewrite, progressively enhanced, fully accessible, positionable tabs, improved features and responsive fetch times, while having fun games to play.</p>
+      <p>Updated (13-09-2023)</p>
+    </div>
+  
+  <p style="color: #fff; margin: 10px;">Use the <kbd>GotBins</kbd> network to make your journey.</p>
+  
+  <div class=tl_container>
+  
+    <!-- A plain set of anchor links in HTML -->
+  
+    <ul class="tl_list">
+      <li><a href="#A" class="a ON">Products/ Services</a></li>
+      <li><a href="#B" class="b" style="color: #bbb;">Account/ Settings</a></li> 
+      <li><a href="#C" class="c">More</a></li>
+    </ul>
+  
+    <section id=A class="tl_section a">
+      <h2 style="color: #fff;">Products/ Services</h2>
+      <ul class="tl_list">
+        <li><a href=#D class=d>Products</a></li>
+        <li><a href=#E class="tl_lnk-on e">Services</a></li>
+      </ul>
+  
+      <div id=D class="tl_section d">
+        <h2 style="color: #fff;">Heres some products</h2>
+        <!-- <p style="color: #fff;"><a href="#" style="color: #9900ff;text-decoration: none;"><b>see all products</b></a></p> -->
+        <table class="rwd-table">
+          <tr >
+          <td style="padding: 10px;">ID</td>
+          <td>Product Name</td>
+          <td>Price</td>
+          <td>Get It Now</td>
+          </tr>
+          <tr>
+            <th style="padding: 10px; color: #9900FF;">001</th>
+            <th>GotBins.exe</th>
+            <th style="color: #27ff27;">£14.99 </th>
+            <th><button style="background-color: #bbb;color: #000;border-radius: 6px;" data-sellix-product="65183a25f12ea"
+              type="submit"
+              alt="Buy Now with GotBins">Buy Now</button></th>
+          </tr>
+          <tr>
+            <th style="padding: 10px; color: #9900FF;">002</th>
+            <th>Login4GotBins</th>
+            <th style="color: #27ff27;">£150.00 </th>
+            <th><button style="background-color: #bbb;color: #000;border-radius: 6px;" data-sellix-product="64b359464b3ca"
+              type="submit"
+              alt="Buy Now with GotBins">Buy Now</button></th>
+          </tr>
+           <tr>
+            <th style="color: #9900FF;">003</th>
+            <th>Topup4GotBins</th>
+            <th style="color: #27ff27;">£100</th>
+            <th><button style="background-color: #bbb;color: #000;border-radius: 6px;" data-sellix-product="64b35c61c7770"
+              type="submit"
+              alt="Buy Now with GotBins">Buy Now</button></th>
+          </tr>
+        </table>
+       
+      </div>
+  
+      <div id=E class="tl_section e">
+        <h2>Services</h2>
+        <p>See Services in detail. <a href="#" style="color: #9900ff;text-decoration: none;">Here</a>.</p>
+        <ul>
+          <li>ccheckr</li>
+          <li>crackr</li>
+          <li>scripts</li>
+          <li>and a lot more</li>
+
+        </ul>
+      </div>
+    
+    </section>
+  
+    <!-- <section id=B class="tl_section b">
+      <h2>Account/ Settings</h2>
+      <p>You can see your profile <a href="" style="color: #9900ff;text-decoration: none;">here</a></p>
+      <ul class="tl_list">
+        <li><a href=#F class=f>Account</a></li>
+        <li><a href=#G class="tl_lnk-on g">Settings</a></li>
+      </ul>
+  
+      <div id=F class="tl_section d">
+        <h2>Account</h2>
+        <p></p>
+      
+      </div>
+  
+      <div id=G class="tl_section g">
+        <h2>Settings</h2>
+        <p></p>
+      </div>
+    </section> -->
+  
+    <section id=C class="tl_section c">
+      <h2>More</h2>
+      <p></p>
+  
+      <!-- A second embedded tablist example -->
+      <ul class="tl_list">
+        <li><a href=#H class=h style="color: #bbb;">Sources</a></li>
+        <li><a href=#I class="tl_lnk-on I">Coming Soon</a></li>
+      </ul>
+  
+      <!-- <div id=H class="tl_section h">
+        <h2>Sources</h2>
+        <p>See here to view all <a href="" style="color: #9900ff;text-decoration: none;">sources</a>.</p>
+      </div> -->
+  
+      <div id=I class="tl_section i">
+        <h2>Coming Soon</h2>
+        <p>> GotBins Chat</p>
+        <p>> GotBins.exe Services housed here. Further details will be released closer to the time.</p>
+        <p>> GotBins App</p>
+      </div>
+    </section>
+  
   </div>
-  <div class="old">
-    <span onclick="window.open('https://gotbins.mysellix.io')">Shop →</span>
-  </div>
-  <div class="ui">
-    <p class="zoom"><span class="zoom zoomin">+</span><span class="zoom zoomout">-</span></p>
-    <p class="zoomlevel"><span class="percent">100</span> % - (<span class="width"></span>px)(<span class="height"></span>px)</p>
-    <p>Dead: <span class="dead">0</span></p>
-    <p>Alive: <span class="alive">0</span></p>
-    <p>Drawn: <span class="drawn">0</span></p>
-    <p><span class="fps">0</span> FPS</p>
-    <a class="save" href="" download="capture.png">Save</a>
-  </div>
-  <script src='https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.5/lodash.min.js'></script>
-  <script  src="./assets/js/landing.js"></script>
+  
+    <p></p>
+  
+    <p style="color: #fff;">Available as a Github repo: <a style="color: #9900ff;text-decoration: none;" href="https://github.com/gotbins" target=_blank title="[new window]">GotBins</a>.</p>
+
+  </main>
+  
+  
+  <footer aria-label="Contact details and other resources" class=myStuff>
+  
+  
+    <style>
+  
+  
+      body{padding-bottom:3.75rem}
+  
+  
+      @media (min-width:26.25em){body{padding-bottom:2.25rem}}
+  
+  
+      @media (min-width:37.5em){body{padding-bottom:1.5rem}}
+  
+  
+      .myStuff{z-index:10;font:100 16px/1.5 sans-serif;text-align:center;color:#fff;background-color:#202020e6;position:fixed;width:100vw;left:0;bottom:0;margin:0;padding:.125em}
+  
+  
+      .myStuff_btn,.myStuff_lnk,.myStuff_lnk:visited{text-decoration-skip: ink;color:hsla(211,100%,72%,1);background-color:transparent;text-decoration-color:hsla(211,100%,72%,.5);transition:all .3s ease-out;white-space:nowrap}
+  
+  
+      .myStuff_btn:focus,.myStuff_btn:hover,.myStuff_lnk:focus,.myStuff_lnk:hover{color:#fff;text-decoration-color:currentcolor}
+  
+  
+      .myStuff_hire{display:block}
+  
+  
+      @media(min-width:37.5em){.myStuff_hire{display:initial;padding-right:.5rem}}
+  
+  
+      .myStuff_btn{position:absolute;top:-1.5rem;right:.5rem;width:3rem;height:3rem;border-radius:50%;border:none;text-align:center;line-height:.8;background-color:hsl(269,19%,20%);font-size:1rem;box-shadow:0 1px 3px #000}
+  
+  
+      .myStuff_btn::-moz-focus-inner{padding:0!important;border:0 none!important}
+  
+  
+    </style>
+  
+  
+    
+  
+  
+    <button class=myStuff_btn onclick="this.parentElement.style.display='none'" aria-label=Close>X</button>
+  
+  
+    <strong class=myStuff_hire>© GotBins 2024 all rights reserved.</strong>
+
+  
+  
+    <a class=myStuff_lnk style="color: #9900ff;text-decoration: none;" target=github title="[GotBins - new window]" rel="me noopener" href="https://github.com/gotbins"><b>Github</b></a> &nbsp; 
+  
+  
+
+  
+  
+    <a class=myStuff_lnk style="color: #9900ff;text-decoration: none;" target=quicklinks title="[new window]" rel="me noopener" href=""><b>Quick Links</b></a>
+  
+  
+  </footer>
+  <!-- partial -->
+  <script src='https://cdnjs.cloudflare.com/ajax/libs/cookieconsent2/3.0.6/cookieconsent.min.js'></script><script  src="./public/js/popup.js"></script>
+  <script src='//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script><script  src="./public/js/script.js"></script>
+  <script>
+    //Nav bar Dropdowns
+var dropdown = ".dropdown";
+
+//If you want the Dropdowns on hover, just change the ".click" method to ".hover". 
+//Note: I DO NOT recommend you use these dropdowns on .hover, this practice has serious usability issues. Leave them on .click and your users will Thank You forever.
+$(".dropdown-container > li").click(function() { 
+    //Hide any other Dropdwn that's visible*
+    $(this).siblings().find(dropdown).slideUp("fast");
+    //Hide Cart Dropdown
+    $(this).parents(".dropdown-container").siblings().find(dropdown).slideUp("fast"); 
+    //Toggle class .active
+    $(this).toggleClass("active");
+    //Remove class .active from any other <li>
+    $(this).parents().find(".active").not(this).removeClass("active");
+    //Slide up/down the actual Dropdwn*		
+    $(this).find(dropdown).stop(true, true).slideToggle("fast");
+    //Deactivate the "focus" on the nav item when clicked
+    $(this).children("a").blur();
+});
+
+//Close button/link
+$(".close").click(function() {
+    $(this).parents(".dropdown").slideUp("fast", function() {
+        //Remove the class .active from parent element
+        $(this).parents().find(".active").removeClass("active");
+    });
+});
+
+//Collapse Dropdowns when clicking anywhere else on the page	
+var mouse_is_inside = false;
+//Select the parent element of the Dropdwn
+$(".dropdown-container li").hover(
+    function() {
+        mouse_is_inside = true;
+    },
+    function() {
+        mouse_is_inside = false;
+    });
+
+$("html").mouseup(function(e) {
+    e.stopPropagation();
+    if (!mouse_is_inside)
+        $(".dropdown").slideUp("fast", function() {
+            $(".active").removeClass("active");
+        });
+});
+
+//Avoid collapsing the Dropdowns when clicking inside of them
+$(".dropdown").click(function(e) {
+    e.stopPropagation();
+});
+
+//Close any open Dropdowns when pressing the ESC key
+var elem = $(".dropdown");
+$(document).on("keydown", function(e) {
+    if (e.keyCode === 27) {
+        $(elem).slideUp("fast");
+        e.stopPropagation();
+    }
+});
+
+/*NOT NEEDED FOR THE DEMO*/
+
+/*Stop the default action of dummy links using "#" so CodePen doesn"t freak out*/
+
+//jQuery version:
+$(".dropdown-container > li a").click(function(e) {
+    e.preventDefault();
+});
+
+//Plain JavaScript verison:
+/*var anchors = document.getElementsByClassName("a");
+ for(i=0, len=anchors.length; i<len; i++){
+     anchors[i].addEventListener("click", function(e){e.preventDefault();});
+ }*/
+
+//Add a title to the links that open in a new tab/window
+$("a[target='_blank']").attr({
+    title: "Opens in a new tab/window"
+}).addClass("new-window");
+
+
+var accessibleTabs6 = (function () {
+
+    "use strict";
+  
+    var d = document;
+    var tabListClass;
+    var onClass;
+    var hoverableClass;
+  
+    var setTabsOff = function (tabList) {
+      var i = tabList.tabs.length;
+      while (i--) {
+        setTab(tabList.tabs[i], false);
+      }
+    };
+  
+    var setTab = function (tab, switchOn) {
+      if (tab && tab.panelId) {
+        d.getElementById(tab.panelId).setAttribute("aria-hidden", !switchOn);
+        tab.setAttribute("aria-selected", switchOn);
+        tab.setAttribute("tabindex", switchOn ? "0" : "-1");
+      }
+    };
+  
+    var _activateTab = function (e) {
+      var tab = e.target;
+      if (e.preventDefault) {
+        e.preventDefault();
+        setTabsOff(tab.tabList);
+        setTab(tab, true);
+        d.getElementById(tab.panelId).children[0].focus();
+      }
+    };
+  
+    var _keypressed = function (e) {
+  
+      var tab = e.target;
+      var newNo = -1;
+      var tabs = tab.tabList.tabs;
+      var maxNo = tabs.length - 1;
+  
+      if (e.keyCode === 37 || e.keyCode === 38) { // left / up arrow
+        newNo = (tab.no === 0) ? maxNo : tab.no - 1;
+      }
+      if (e.keyCode === 39 || e.keyCode === 40) { // right arrow / down arrow
+        newNo = (tab.no === maxNo) ? 0 : tab.no + 1;
+      }
+  
+      if (newNo > -1) {
+        setTabsOff(tab.tabList);
+        setTab(tabs[newNo], true);
+        tabs[newNo].focus();
+      }
+    };
+  
+    var _tabHovered = function (e) {
+      var a = e.target;
+      var useHover = a.tabList.classList.contains(hoverableClass);
+      if (useHover) {
+        _activateTab(e);
+      }
+    };
+  
+    var _events = function (tab) {
+      tab.addEventListener("click", _activateTab, false);
+      tab.addEventListener("keydown", _keypressed, false);
+      tab.addEventListener("mouseover", _tabHovered, false);
+    };
+  
+    var _initialiseAriaAttributes = function (tab) {
+  
+      var tabPanel = d.getElementById(tab.panelId);
+  
+      tab.parentNode.setAttribute("role", "presentation");
+      tab.setAttribute("role", "tab");
+      tab.setAttribute("aria-controls", tab.panelId);
+  
+      tabPanel.setAttribute("role", "tabpanel");
+      tabPanel.setAttribute("aria-labelledby", tab.id);
+  
+      // Make first <section> object keyboard focussable
+      // Preferably a heading
+      // Tabindex=0 to work both forwards and backwards through the keychain
+      tabPanel.children[0].setAttribute("tabindex", "0");
+  
+    };
+  
+    var _setUpConfig = function (cfg) {
+      tabListClass = cfg.tabListClass || "tl_list";
+      onClass = cfg.onClass || "ON";
+      hoverableClass = cfg.hoverableClass || "tl-hoverable";
+    };
+  
+    var _setUpTab = function (tab, panelId, count) {
+      tab.no = count;
+      tab.id = "tab-" + panelId;
+      tab.panelId = panelId;
+      _initialiseAriaAttributes(tab);
+      _events(tab);
+    };
+  
+  
+    var _initialiseTabList = function (tabList) {
+  
+      var defaultTab = 0;
+      var panelId;
+      var tabPanel;
+      var i;
+  
+      if (tabList) {
+  
+        tabList.setAttribute("role", "tablist");
+        tabList.tabs = tabList.getElementsByTagName("a");
+        i = tabList.tabs.length;
+  
+        while (i--) {
+  
+          tabList.tabs[i].tabList = tabList;
+  
+          panelId = tabList.tabs[i].href.slice(tabList.tabs[i].href.lastIndexOf("#") + 1);
+          tabPanel = d.getElementById(panelId);
+  
+          if (tabPanel) {
+            _setUpTab(tabList.tabs[i], panelId, i);
+            if (tabList.tabs[i].classList.contains(onClass)) {
+              defaultTab = i;
+  
+              // onClass only used to declare intial state, so remove from DOM
+              tabList.tabs[i].classList.remove(onClass);
+              d.getElementById(panelId).classList.remove(onClass);
+            }
+          }
+        }
+        setTabsOff(tabList);
+        if (tabList.tabs[defaultTab] && tabList.tabs[defaultTab].panelId) {
+          setTab(tabList.tabs[defaultTab], true);
+        }
+      }
+    };
+  
+    var _isMustardCut = function (e) {
+      // check browser feature support (IE10+)
+      return (
+        (typeof d.querySelectorAll === "function") &&
+        d.addEventListener &&
+        !!d.documentElement.classList // IE10+
+      );
+    };
+  
+    var init = function (cfg) {
+      var tabLists;
+      var i;
+  
+      if (_isMustardCut()) {
+        _setUpConfig(cfg);
+        tabLists = d.getElementsByClassName(tabListClass);
+        i = tabLists.length;
+        while (i--) {
+          _initialiseTabList(tabLists[i]);
+        }
+      }
+    };
+  
+    return {
+      init: init
+    };
+  
+  }());
+  
+  
+  accessibleTabs6.init({
+    tabListClass : "tl_list",   // default, may omit
+    onClass : "ON",               // default, may omit
+    hoverableClass : "tl-hoverable"  // default, may omit
+  });
+  
+  (function () {
+    "use strict";
+  
+    var carousels = function () {
+      $(".owl-carousel1").owlCarousel({
+        loop: true,
+        center: true,
+        margin: 0,
+        responsiveClass: true,
+        nav: false,
+        responsive: {
+          0: {
+            items: 1,
+            nav: false
+          },
+          680: {
+            items: 2,
+            nav: false,
+            loop: false
+          },
+          1000: {
+            items: 3,
+            nav: true
+          }
+        }
+      });
+    };
+  
+    (function ($) {
+      carousels();
+    })(jQuery);
+  })();
+
+  window.addEventListener("load", function(){
+window.cookieconsent.initialise({
+  "palette": {
+    "popup": {
+      "background": "#9900ff"
+    },
+    "button": {
+      "background": "#fff",
+      "text": "#237afc"
+    }
+  },
+  "type": "opt-in",
+  "content": {
+    "message": "We use cookies to optimize site functionality and give you the best possible experience.",
+    "dismiss": "Decline",
+    "allow": "Accept",
+    "href": "www.example.com/cookies"
+  },
+  revokable: true,
+  onStatusChange: function(status, chosenBefore) {
+    console.log('Status', status);
+    console.log('chosenBefore', chosenBefore);
+  }
+})});
+// Function to generate a random wallet address (for demonstration purposes)
+function generateWalletAddress() {
+    return "RandomWalletAddress123"; // Replace with your actual wallet generation logic
+}
+
+document.addEventListener("DOMContentLoaded", function () {
+    // Get all "Buy Now" buttons
+    const buyButtons = document.querySelectorAll("button");
+
+    // Add click event listener to each button
+    buyButtons.forEach((button) => {
+        button.addEventListener("click", function () {
+            // Generate a unique wallet address for each product
+            const walletAddress = generateWalletAddress();
+
+            // Show the payment popup
+            const popup = document.getElementById("paymentPopup");
+            popup.style.display = "block";
+
+            // Display the wallet address in the input field
+            const walletInput = document.getElementById("walletAddress");
+            walletInput.value = walletAddress;
+
+            // Button to copy the wallet address to the clipboard
+            const copyButton = document.getElementById("copyAddress");
+            copyButton.addEventListener("click", function () {
+                walletInput.select();
+                document.execCommand("copy");
+                alert("Wallet address copied to clipboard!");
+            });
+        });
+    });
+});
+
+    </script>
+  
+
 </body>
 </html>
